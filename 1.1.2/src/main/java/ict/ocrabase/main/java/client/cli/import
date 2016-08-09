@@ -1,0 +1,24 @@
+according to the test.txt
+-s /test-file -ts test,SEMICOLON,f1:num:STRING,f2:stat:STRING -l 32
+
+
+-s /index-data -ts test_table_index,SEMICOLON,f1:num:STRING,f2:state:STRING,f3:price:STRING,f4:datet:STRING,f5:rank:STRING,f6:clerk:STRING,f7:ol:STRING,f8:desc:STRING,f9:desc2:STRING -l 32
+
+
+-s /test-file -ts test,SEMICOLON,f1:num:STRING,f2:stat:STRING -l 32
+
+-s /right -ts test_table,SEMICOLON,f1:num:STRING,f2:state:STRING,f3:price:STRING,f4:datet:STRING,f5:rank:STRING,f6:clerk:STRING,f7:ol:STRING,f8:desc:STRING -l 32
+
+-s /index-data -ts test_table_index,SEMICOLON,f1:num:STRING,f2:state:STRING,f3:price:STRING,f4:datet:STRING:CCINDEX:test_table_f4,f5:rank:STRING,f6:clerk:STRING,f7:ol:STRING,f8:desc:STRING -l 32
+
+-s /2000wanreal -ts 2000wanreal,SEMICOLON,f1:num:STRING,f2:state:STRING,f3:price:STRING,f4:datet:STRING,f5:rank:STRING,f6:clerk:STRING,f7:ol:STRING,f8:desc:STRING,f9:desc1:STRING,f10:desc:STRING -l 32
+
+bin/hadoop fs -put /opt/newqhl/CCIndex/test-data/CCIndex-bulkload-noindex-right.txt /right
+
+
+-s /index-data -ts real_table_with_index,SEMICOLON,f:c1:STRING:CCINDEX:real_table_with_index-f_c1,f:c2:STRING,f:c3:STRING,f:c4:STRING:CCINDEX:real_table_with_index-f_c4,f:c5:STRING,f:c6:STRING,f:c7:STRING,f:c8:STRING -l 32
+
+
+
+
+
