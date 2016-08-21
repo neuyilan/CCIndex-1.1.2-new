@@ -58,7 +58,7 @@ public class QueryByCondition {
 		}
 	}
 
-	public void queryByColumnRange(String startValue, String endValue)
+	public void queryByColumnRange(String startValue, String endValue,String svalue,String evalue)
 			throws IOException {
 		conf = HBaseConfiguration.create();
 		HTable table = new HTable(conf, table_test);
@@ -75,11 +75,11 @@ public class QueryByCondition {
 		
 		Filter filter3 = new SingleColumnValueFilter(Bytes.toBytes("f"),
 				Bytes.toBytes("c1"), CompareOp.GREATER_OR_EQUAL,
-				Bytes.toBytes("100000"));
+				Bytes.toBytes(svalue));
 		filters.add(filter3);
 		
 		Filter filter4 = new SingleColumnValueFilter(Bytes.toBytes("f"),
-				Bytes.toBytes("c1"), CompareOp.LESS, Bytes.toBytes("200000"));
+				Bytes.toBytes("c1"), CompareOp.LESS, Bytes.toBytes(evalue));
 		filters.add(filter4);
 		
 		Scan s = new Scan();
@@ -149,18 +149,18 @@ public class QueryByCondition {
 
 	public static void main(String args[]) {
 		QueryByCondition queryByCondition = new QueryByCondition();
-		String columnValue = "1997-04-03";
-		String rowKey = "1997-04-03";
-
-		String startValue = "1993-01-01";
-		String endValue = "1993-01-05";
-
+		
+		String svalue = "100000";
+		String evalue = "300000";
+		
+		String startValue = "1994-01-01";
+		String endValue = "1994-01-30";
 		long startTime = System.currentTimeMillis();
 
 		try {
 			// queryByCondition.queryByColumnValue(columnValue);
 			// queryByCondition.queryByRowKey(rowKey);
-			queryByCondition.queryByColumnRange(startValue, endValue);
+			queryByCondition.queryByColumnRange(startValue, endValue,svalue,evalue);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

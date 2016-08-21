@@ -19,11 +19,11 @@
 <configuration>
 <property>
 <name>fs.defaultFS</name>
-<value>hdfs://data12:9000</value>
+<value>hdfs://data7:9000</value>
 </property>
 <property>  
 <name>hadoop.tmp.dir</name>  
-<value>/opt/changxu/project/tmp-1.1.2/hadoop</value>  
+<value>/opt/qhl/cluster/ccindex-1.1.2/tmp-1.1.2/hadoop</value>  
 </property> 
     <property>  
         <name>io.file.buffer.size</name>  

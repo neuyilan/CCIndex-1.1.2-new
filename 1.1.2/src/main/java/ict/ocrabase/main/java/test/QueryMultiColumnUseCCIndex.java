@@ -67,7 +67,7 @@ public class QueryMultiColumnUseCCIndex {
 	}
 
 	public static void queryTest() throws IOException {
-		File datasource = new File("/opt/newqhl/CCIndex/txt");
+		File datasource = new File("/opt/qhl/downloaddata/CCIndex/output");
 		try {
 			datasource.createNewFile();
 		} catch (IOException e) {
@@ -76,15 +76,15 @@ public class QueryMultiColumnUseCCIndex {
 		}
 
 		IndexTable indextable = new IndexTable("real_table_with_index");
-		indextable.setScannerCaching(1);
-		indextable.setMaxScanThreads(1);
+		indextable.setScannerCaching(10000);
+		indextable.setMaxScanThreads(10);
 		System.out.println("max thread:" + indextable.getMaxScanThreads());
 
-		String startvalue = "1993-01-01";
-		String endvalue = "1993-01-05";
+		String startvalue = "1994-01-01";
+		String endvalue = "1994-01-30";
 
 		String svalue = "100000";
-		String evalue = "200000";
+		String evalue = "300000";
 
 		Range[] ranges = new Range[2];
 		ranges[0] = new Range(indextable.getTableName(), Bytes.toBytes("f:c4"));

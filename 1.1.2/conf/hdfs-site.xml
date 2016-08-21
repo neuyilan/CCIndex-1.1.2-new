@@ -36,12 +36,12 @@
 
 <property> 
 <name>dfs.datanode.data.dir</name>  
-<value>/opt/changxu/project/tmp-1.1.2/hdfs/data</value>  
+<value>/opt/qhl/cluster/ccindex-1.1.2/tmp-1.1.2/hdfs/data</value>  
 </property>
 
 <property>  
 <name>dfs.namenode.name.dir</name>  
-<value>/opt/changxu/project/tmp-1.1.2/hdfs/name</value>  
+<value>/opt/qhl/cluster/ccindex-1.1.2/tmp-1.1.2/hdfs/name</value>  
 </property>
 
 <property>
@@ -51,12 +51,12 @@
 	<!-- 配置 namenode和secondary namenode，这里不在同一台机器上面 -->
 	<property>
 		<name>dfs.http.address</name>
-		<value>data12:50070</value>
+		<value>data7:50070</value>
 		<description>The address and the base port where the dfs namenode web ui will listen on.If the port is 0 then the server will start on a free port.</description>
 	</property>
 	<property>
 		<name>dfs.namenode.secondary.http-address</name>
-		<value>data12:50090</value>
+		<value>data7:50090</value>
 	</property>
 	<!-- 配置 namenode和secondary namenode，这里不在同一台机器上面 -->
 	

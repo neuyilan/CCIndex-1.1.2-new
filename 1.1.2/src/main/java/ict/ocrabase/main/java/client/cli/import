@@ -16,7 +16,7 @@ according to the test.txt
 bin/hadoop fs -put /opt/newqhl/CCIndex/test-data/CCIndex-bulkload-noindex-right.txt /right
 
 
--s /index-data -ts real_table_with_index,SEMICOLON,f:c1:STRING:CCINDEX:real_table_with_index-f_c1,f:c2:STRING,f:c3:STRING,f:c4:STRING:CCINDEX:real_table_with_index-f_c4,f:c5:STRING,f:c6:STRING,f:c7:STRING,f:c8:STRING -l 32
+-s /CCIndex/index-data -ts real_table_with_index,SEMICOLON,f:c1:STRING:CCINDEX:real_table_with_index-f_c1,f:c2:STRING,f:c3:STRING,f:c4:STRING:CCINDEX:real_table_with_index-f_c4,f:c5:STRING,f:c6:STRING,f:c7:STRING,f:c8:STRING -l 32
 
 
 

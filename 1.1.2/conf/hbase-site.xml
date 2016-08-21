@@ -23,7 +23,7 @@
 <configuration>
   <property>
     <name>hbase.rootdir</name>
-    <value>hdfs://data12:9000/hbase</value>
+    <value>hdfs://data7:9000/hbase</value>
   </property>
 
 <property>
@@ -41,19 +41,18 @@
 
 <property>
     <name>hbase.tmp.dir</name>
-    <value>/opt/changxu/project/tmp-1.1.2/hbase</value>
+    <value>/opt/qhl/cluster/ccindex-1.1.2/tmp-1.1.2/hbase</value>
   </property>
 
  <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>data12,data15,data16</value>
+    <value>data1,data2,data7,data8,data9</value>
   </property>
 
 <property>
     <name>hbase.zookeeper.property.dataDir</name>
-    <value>/opt/changxu/project/tmp/zookeeper/data</value>
+    <value>/opt/qhl/cluster/ccindex-1.1.2/tmp-1.1.2/zookeeper/data</value>
   </property>
-
 
 <property>
 		<name>hbase.master.port</name>
@@ -66,7 +65,7 @@
         <description>Time difference of regionserver from master</description>  
     </property> 
 
-	<property>
+<property>
 		<name>hbase.coprocessor.region.classes</name>
 		<value>org.apache.hbase.coprocessor.PutObserver,org.apache.hbase.coprocessor.DeleteObserver</value>
 	</property>

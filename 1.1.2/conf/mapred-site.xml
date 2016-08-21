@@ -17,25 +17,24 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-
-<property>
+	<property>
 		<name>mapreduce.framework.name</name>
 		<value>yarn</value>
 	</property>
 	
 	<property>
 		<name>mapreduce.jobtracker.http.address</name>
-		<value>data12:50030</value>
+		<value>data7:50030</value>
 	</property>
 	
 	<property>
 		<name>mapreduce.jobhistory.address</name>
-		<value>data12:10020</value>
+		<value>data7:10020</value>
 	</property>
 	
 	<property>
 		<name>mapreduce.jobhistory.webapp.address</name>
-		<value>data12:19888</value>
+		<value>data7:19888</value>
 	</property>
 	
 	<!-- 
@@ -44,11 +43,11 @@
 		<value>data12:49001</value>
 	</property> 
 	 -->
-
-	<!-- <property>
+	<!-- 
+	<property>
 		<name>mapred.child.Java.opts</name>
 		<value>-Xmx4096m</value>
-	</property> -->
-	
+	</property>
+	-->
 	
 </configuration>

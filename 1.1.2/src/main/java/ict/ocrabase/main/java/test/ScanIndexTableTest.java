@@ -27,8 +27,8 @@ public class ScanIndexTableTest {
 	public static void main(String[] args) throws IOException,
 			IndexExistedException {
 
-		 scanTest();
-//		scanTest__f_c1();
+//		 scanTest();
+		scanTest__f_c1();
 //		scanTest__f_c4();
 	}
 
