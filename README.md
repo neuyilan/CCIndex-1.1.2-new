@@ -14,7 +14,7 @@ The total overview like this:
  ![packing-list](https://cl.ly/1l0v0p0H2Q3W/packing_list.png)
  
 ##Installation
-Prerequisites: the Hadoop and the HBase environment have been right configured 
+Prerequisites: the Hadoop and the HBase environment have been right configured. the hadoop version is hadooop-2.5.1. the hbase version is hbase-1.1.2
 - Copy the file CCIndex-1.1.2.jar to path : *$HADOOP_ENV$/share/hadoop/yarn* . like this:
 
 ![yarn-jar](https://cl.ly/2j3A1R3F262A/jar_yarn.png)
@@ -46,9 +46,9 @@ Bulkload use map reduce to put data to the base table and the ccindex table
 
 Example:
 
-- First upload the TPC-H test data to the hdfs.
+- First upload the TPC-H test data to the hdfs.[download](https://pan.baidu.com/s/1hsFKkde)
 
-*bin/hadoop fs -put ../test-data/CCIndex-bulkload-index.txt  /index-data*
+*bin/hadoop fs -put ../test-data/xaa1000.txt  /index-data*
 - *ict.ocrabase.main.java.test.CreateTableTestBulkload.java* create hbase table and the ccindex table. 
 after run the above code, you will see there exists three tables like this:
 ![index-table](https://d17oy1vhnax1f7.cloudfront.net/items/0R123c423s2a1I1y3z0U/index_table.3e2d1F1t3c08.png)
@@ -74,6 +74,7 @@ Example:
 ![paramater](https://cl.ly/1u3Y0i1W0y2x/paramater.png)
 ##Simple query test 
 - Data source: [TPC-H ORDERS table](http://www.tpc.org/tpch/default.asp)
+- Sample data source in our test [download](https://pan.baidu.com/s/1hsFKkde)
 - Total 10 million line data
 - Index column c1(CUSTKEY) and c4(ORDERDATE)
 - The query sql like this:
