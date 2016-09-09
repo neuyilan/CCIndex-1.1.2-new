@@ -707,79 +707,79 @@ public class TableInfo {
 		}
 	}
 	
-	/**
-	 * Used for test
-	 * @param args
-	 * @throws Exception 
-	 */
-	public static void main(String args[]) throws Exception{
-		//System.out.print((byte)'\t');
-		
-//		TableInfo info = TableInfo.createFromXML("/home/gu/workspace/MRImport-old/conf/table.xml");
-//		TableInfo info = new TableInfo("test1,44,f:1:STRING:null:null,f2:2:string,f:2:LONG:null:null,f:3:LONG:null:null,f:4:INT:null:null,f:5:INT:null:null,f2:1:int,f3:1:long");
-//		TableInfo info = new TableInfo("test,comma,name:1:String,name:2:String,name:3:String,name:4:String,name:5:String");
-//		for(ColumnInfo col:info.getColumnInfo())
-//			System.out.println(col.getPos());
-//		ColumnInfo col = info.getColumnInfo(1);
-//		System.out.println(info.toSimpleString());
-//		byte[] row = Bytes.toBytes("row");
-//		byte[] line = Bytes.toBytes("1000");
-//		byte[] bytes = BulkLoadUtil.createKVByte(row, col.bytes, col.getDataType(), line, 0, line.length);
-//		KeyValue kv = new KeyValue(bytes);
-//		System.out.println(Bytes.toStringBinary(kv.getValue()));
-		
-//		IndexAdmin indexadmin=new IndexAdmin(HBaseConfiguration.create());
-//		int n = Integer.valueOf(args[0]);
-//		int m = Integer.valueOf(args[1]);
-//		IndexType type = null;
-//		switch(n){
-//		case 1:type=IndexType.CCINDEX;break;
-//		case 2:type=IndexType.SECONDARYINDEX;break;
-//		case 3:type=IndexType.IMPSECONDARYINDEX;break;
-//		case 4:indexadmin.disableTable(Bytes.toBytes("test"));indexadmin.deleteTable(Bytes.toBytes("test"));System.exit(0);
-//		}
-//		HTableDescriptor desc=new HTableDescriptor("test");
-//		desc.addFamily(new HColumnDescriptor(Bytes.toBytes("f")));
-//		IndexSpecification[] index=new IndexSpecification[1];
-//		index[0]=new IndexSpecification(Bytes.toBytes("f:2"),type);
-//		if(n == 3){
-//			index[0].addAdditionColumn(Bytes.toBytes("f"), Bytes.toBytes("1"));
-//			index[0].addAdditionColumn(Bytes.toBytes("f"), Bytes.toBytes("3"));
-//		}
-//		if(m==1){
-//			indexadmin.disableTable("test");
-//			indexadmin.addIndexes(Bytes.toBytes("test"), index);
-//			indexadmin.enableTable("test");
-//		}
-//		else if (m==0){
-//			IndexTableDescriptor indexDesc=new IndexTableDescriptor(desc,index);
-//			indexadmin.createTable(indexDesc);
-//		}
-		
-//		TableInfo table = new TableInfo("test,44,f:1:String:null:null,f:2:String:CCINDEX:test-f_2,f:3:String:null:null,f:4:String:null:null,f:5:String:null:null");
-//		TableInfo.ColumnInfo info = table.getColumnInfo(table.getIndexPos(1-1));
-//		System.out.println(info.getIndexTableName());
+//	/**
+//	 * Used for test
+//	 * @param args
+//	 * @throws Exception 
+//	 */
+//	public static void main(String args[]) throws Exception{
+//		//System.out.print((byte)'\t');
 //		
-//		byte[] htdBytes = Bytes.toBytesBinary("\\x00\\x00\\x00\\x05\\x04test\\x00\\x00\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x08BASE_KEY\\x00\\x00\\x00\\x08BASE_KEY\\x00\\x00\\x00\\x07IS_ROOT\\x00\\x00\\x00\\x05false\\x00\\x00\\x00\\x06KEYGEN\\x00\\x00\\x00;ict.ocrabase.main.java.client.index.SimpleIndexKeyGenerator\\x00\\x00\\x00\\x07IS_META\\x00\\x00\\x00\\x05false\\x00\\x00\\x00\\x09INDEX_KEY\\x00\\x00\\x00\\x13\\x00\\x00\\x00\\x01\\x01\\x04test\\x03f_2\\x03f:2\\x00\\x00\\x00\\x00\\x01\\x08\\x01f\\x00\\x00\\x00\\x08\\x00\\x00\\x00\\x0BBLOOMFILTER\\x00\\x00\\x00\\x04NONE\\x00\\x00\\x00\\x11REPLICATION_SCOPE\\x00\\x00\\x00\\x010\\x00\\x00\\x00\\x08VERSIONS\\x00\\x00\\x00\\x013\\x00\\x00\\x00\\x0BCOMPRESSION\\x00\\x00\\x00\\x04NONE\\x00\\x00\\x00\\x03TTL\\x00\\x00\\x00\\x0A2147483647\\x00\\x00\\x00\\x09BLOCKSIZE\\x00\\x00\\x00\\x0565536\\x00\\x00\\x00\\x09IN_MEMORY\\x00\\x00\\x00\\x05false\\x00\\x00\\x00\\x0ABLOCKCACHE\\x00\\x00\\x00\\x04true");
-//		HTableDescriptor htd = new HTableDescriptor();
+////		TableInfo info = TableInfo.createFromXML("/home/gu/workspace/MRImport-old/conf/table.xml");
+////		TableInfo info = new TableInfo("test1,44,f:1:STRING:null:null,f2:2:string,f:2:LONG:null:null,f:3:LONG:null:null,f:4:INT:null:null,f:5:INT:null:null,f2:1:int,f3:1:long");
+////		TableInfo info = new TableInfo("test,comma,name:1:String,name:2:String,name:3:String,name:4:String,name:5:String");
+////		for(ColumnInfo col:info.getColumnInfo())
+////			System.out.println(col.getPos());
+////		ColumnInfo col = info.getColumnInfo(1);
+////		System.out.println(info.toSimpleString());
+////		byte[] row = Bytes.toBytes("row");
+////		byte[] line = Bytes.toBytes("1000");
+////		byte[] bytes = BulkLoadUtil.createKVByte(row, col.bytes, col.getDataType(), line, 0, line.length);
+////		KeyValue kv = new KeyValue(bytes);
+////		System.out.println(Bytes.toStringBinary(kv.getValue()));
 //		
+////		IndexAdmin indexadmin=new IndexAdmin(HBaseConfiguration.create());
+////		int n = Integer.valueOf(args[0]);
+////		int m = Integer.valueOf(args[1]);
+////		IndexType type = null;
+////		switch(n){
+////		case 1:type=IndexType.CCINDEX;break;
+////		case 2:type=IndexType.SECONDARYINDEX;break;
+////		case 3:type=IndexType.IMPSECONDARYINDEX;break;
+////		case 4:indexadmin.disableTable(Bytes.toBytes("test"));indexadmin.deleteTable(Bytes.toBytes("test"));System.exit(0);
+////		}
+////		HTableDescriptor desc=new HTableDescriptor("test");
+////		desc.addFamily(new HColumnDescriptor(Bytes.toBytes("f")));
+////		IndexSpecification[] index=new IndexSpecification[1];
+////		index[0]=new IndexSpecification(Bytes.toBytes("f:2"),type);
+////		if(n == 3){
+////			index[0].addAdditionColumn(Bytes.toBytes("f"), Bytes.toBytes("1"));
+////			index[0].addAdditionColumn(Bytes.toBytes("f"), Bytes.toBytes("3"));
+////		}
+////		if(m==1){
+////			indexadmin.disableTable("test");
+////			indexadmin.addIndexes(Bytes.toBytes("test"), index);
+////			indexadmin.enableTable("test");
+////		}
+////		else if (m==0){
+////			IndexTableDescriptor indexDesc=new IndexTableDescriptor(desc,index);
+////			indexadmin.createTable(indexDesc);
+////		}
 //		
-//		htd.readFields(new DataInputStream(new ByteArrayInputStream(htdBytes)));
-//		Configuration config = HBaseConfiguration.create();
-//		config.addResource(new Path("file:///home/gu/hadoop-hbase/ictbase/ICTBase/conf/hbase-site.xml"));
-//		config.reloadConfiguration();
-//		HBaseAdmin admin = new HBaseAdmin(config);
-//		HTableDescriptor htd = admin.getTableDescriptor(Bytes.toBytes("test"));
-//		System.out.println(htd.toString());
-//		System.out.println(htd.getValue("COMPRESSION"));
-//		IndexTableDescriptor itd = new IndexTableDescriptor(htd);
-//		System.out.println(itd.getIndexSpecification(Bytes.toBytes("f:2")).getIndexType().getName());
-//		info.deleteFamily("f2");
-//		System.out.println(info.toSimpleString());
-		TableInfo tab = new TableInfo("table,tab,KEY,CF1:col1:int,CF2:col6:string,TIMESTAMP");
-//		tab.removeKey();
-		System.out.println(tab.getTimestampPos());
-	}
+////		TableInfo table = new TableInfo("test,44,f:1:String:null:null,f:2:String:CCINDEX:test-f_2,f:3:String:null:null,f:4:String:null:null,f:5:String:null:null");
+////		TableInfo.ColumnInfo info = table.getColumnInfo(table.getIndexPos(1-1));
+////		System.out.println(info.getIndexTableName());
+////		
+////		byte[] htdBytes = Bytes.toBytesBinary("\\x00\\x00\\x00\\x05\\x04test\\x00\\x00\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x08BASE_KEY\\x00\\x00\\x00\\x08BASE_KEY\\x00\\x00\\x00\\x07IS_ROOT\\x00\\x00\\x00\\x05false\\x00\\x00\\x00\\x06KEYGEN\\x00\\x00\\x00;ict.ocrabase.main.java.client.index.SimpleIndexKeyGenerator\\x00\\x00\\x00\\x07IS_META\\x00\\x00\\x00\\x05false\\x00\\x00\\x00\\x09INDEX_KEY\\x00\\x00\\x00\\x13\\x00\\x00\\x00\\x01\\x01\\x04test\\x03f_2\\x03f:2\\x00\\x00\\x00\\x00\\x01\\x08\\x01f\\x00\\x00\\x00\\x08\\x00\\x00\\x00\\x0BBLOOMFILTER\\x00\\x00\\x00\\x04NONE\\x00\\x00\\x00\\x11REPLICATION_SCOPE\\x00\\x00\\x00\\x010\\x00\\x00\\x00\\x08VERSIONS\\x00\\x00\\x00\\x013\\x00\\x00\\x00\\x0BCOMPRESSION\\x00\\x00\\x00\\x04NONE\\x00\\x00\\x00\\x03TTL\\x00\\x00\\x00\\x0A2147483647\\x00\\x00\\x00\\x09BLOCKSIZE\\x00\\x00\\x00\\x0565536\\x00\\x00\\x00\\x09IN_MEMORY\\x00\\x00\\x00\\x05false\\x00\\x00\\x00\\x0ABLOCKCACHE\\x00\\x00\\x00\\x04true");
+////		HTableDescriptor htd = new HTableDescriptor();
+////		
+////		
+////		htd.readFields(new DataInputStream(new ByteArrayInputStream(htdBytes)));
+////		Configuration config = HBaseConfiguration.create();
+////		config.addResource(new Path("file:///home/gu/hadoop-hbase/ictbase/ICTBase/conf/hbase-site.xml"));
+////		config.reloadConfiguration();
+////		HBaseAdmin admin = new HBaseAdmin(config);
+////		HTableDescriptor htd = admin.getTableDescriptor(Bytes.toBytes("test"));
+////		System.out.println(htd.toString());
+////		System.out.println(htd.getValue("COMPRESSION"));
+////		IndexTableDescriptor itd = new IndexTableDescriptor(htd);
+////		System.out.println(itd.getIndexSpecification(Bytes.toBytes("f:2")).getIndexType().getName());
+////		info.deleteFamily("f2");
+////		System.out.println(info.toSimpleString());
+//		TableInfo tab = new TableInfo("table,tab,KEY,CF1:col1:int,CF2:col6:string,TIMESTAMP");
+////		tab.removeKey();
+//		System.out.println(tab.getTimestampPos());
+//	}
 
 	
 }

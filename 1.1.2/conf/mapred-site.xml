@@ -37,17 +37,4 @@
 		<value>data7:19888</value>
 	</property>
 	
-	<!-- 
-	<property>
-		<name>mapred.job.tracker</name>
-		<value>data12:49001</value>
-	</property> 
-	 -->
-	<!-- 
-	<property>
-		<name>mapred.child.Java.opts</name>
-		<value>-Xmx4096m</value>
-	</property>
-	-->
-	
 </configuration>

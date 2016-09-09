@@ -14,7 +14,7 @@ import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
 
 public class PutTableWithIndexTest {
-	static String filePath = "/opt/qhl/test-data/xaa1000.txt";
+	static String filePath = "/opt/qhl/test-data/xaa1000.txt";//specify the file path
 	static boolean wal = false;
 
 	 private static final byte[] tableName = Bytes.toBytes("test_table_with_index");

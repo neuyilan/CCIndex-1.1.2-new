@@ -98,6 +98,8 @@ public class IndexAdmin{
 		admin.createTable(descriptor, indexDesc.getSplitKeys());
 		admin.disableTable(descriptor.getName());
 		
+		
+		
 		if(indexDesc.hasIndex()){
 			this.addIndexes(indexDesc.getTableDescriptor().getName(), indexDesc.getIndexSpecifications());
 		}

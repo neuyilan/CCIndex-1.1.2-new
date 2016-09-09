@@ -1,5 +1,7 @@
-package ict.ocrabase.main.java.test;
+package ict.ocrabase.main.java.query.nouseCC;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,13 @@ import org.apache.hadoop.hbase.filter.FilterList;
 import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
-public class QueryByCondition {
+/**
+ * select orderkey, orderdate, shippriority from orders where custkey=? and orderdate < ?
+ * 
+ * @author houliang
+ *
+ */
+public class NoOrderQ3 {
 	private static Configuration conf;
 	private static final byte[] table_test = Bytes
 			.toBytes("real_table_with_index");
@@ -58,117 +66,125 @@ public class QueryByCondition {
 		}
 	}
 
-	public void queryByColumnRange(String startValue, String endValue,String svalue,String evalue)
-			throws IOException {
+	public void queryByColumnRange(String custkey, String orderDate,
+			String saveFile, String tableName, int scanCache, int threads) throws IOException {
+		File datasource = new File(saveFile);
+		FileWriter fileWriter;
+		try {
+			datasource.createNewFile();
+			fileWriter = new FileWriter(datasource, true);
+		} catch (IOException e) {
+			System.err.println("create file failed");
+			e.printStackTrace();
+		}
+		
 		conf = HBaseConfiguration.create();
-		HTable table = new HTable(conf, table_test);
+		HTable table = new HTable(conf, tableName);
 		List<Filter> filters = new ArrayList<Filter>();
 
 		Filter filter1 = new SingleColumnValueFilter(Bytes.toBytes("f"),
-				Bytes.toBytes("c4"), CompareOp.GREATER_OR_EQUAL,
-				Bytes.toBytes(startValue));
+				Bytes.toBytes("c1"), CompareOp.EQUAL,
+				Bytes.toBytes(custkey));
 		filters.add(filter1);
-		
+
 		Filter filter2 = new SingleColumnValueFilter(Bytes.toBytes("f"),
-				Bytes.toBytes("c4"), CompareOp.LESS, Bytes.toBytes(endValue));
+				Bytes.toBytes("c4"), CompareOp.LESS, Bytes.toBytes(orderDate));
 		filters.add(filter2);
-		
-		Filter filter3 = new SingleColumnValueFilter(Bytes.toBytes("f"),
-				Bytes.toBytes("c1"), CompareOp.GREATER_OR_EQUAL,
-				Bytes.toBytes(svalue));
-		filters.add(filter3);
-		
-		Filter filter4 = new SingleColumnValueFilter(Bytes.toBytes("f"),
-				Bytes.toBytes("c1"), CompareOp.LESS, Bytes.toBytes(evalue));
-		filters.add(filter4);
-		
+
 		Scan s = new Scan();
-		s.setCaching(100);
+		s.setCaching(scanCache);
 		FilterList filterList1 = new FilterList(filters);
-		
+
 		s.setFilter(filterList1);
-		
+
 		ResultScanner rs = table.getScanner(s);
 		long count = 0;
+		fileWriter = new FileWriter(datasource);
 		for (Result r : rs) {
-//			println_test(r);
+			fileWriter.write(println_test(r)+"\n");
+			fileWriter.flush();
 			count++;
 		}
+		fileWriter.close();
 		System.out.println("total count = " + count);
 	}
 
-	public void println_test(Result result) {
+	
+	public static String println_test(Result result) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("row=" + Bytes.toString(result.getRow()));
 
-//		List<KeyValue> kv = result.getColumn(Bytes.toBytes("f"),
-//				Bytes.toBytes("c1"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c1=" + Bytes.toInt(kv.get(0).getValue()));
-//		}
-//
-//		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c2"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c2=" + Bytes.toString(kv.get(0).getValue()));
-//		}
-//
-//		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c3"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c3=" + Bytes.toDouble(kv.get(0).getValue()));
-//		}
-//
-//		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c4"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c4=" + Bytes.toString(kv.get(0).getValue()));
-//		}
-//		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c5"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c5=" + Bytes.toString(kv.get(0).getValue()));
-//		}
-//
-//		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c6"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c6=" + Bytes.toString(kv.get(0).getValue()));
-//		}
-//		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c7"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c7=" + Bytes.toInt(kv.get(0).getValue()));
-//		}
-//		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c8"));
-//		if (kv.size() != 0) {
-//			sb.append(", f:c8=" + Bytes.toString(kv.get(0).getValue()));
-//		}
-		
-		
-		List<KeyValue>  kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c4"));
+		List<KeyValue> kv = result.getColumn(Bytes.toBytes("f"),
+				Bytes.toBytes("c1"));
+		if (kv.size() != 0) {
+			sb.append(", f:c1=" + Bytes.toString(kv.get(0).getValue()));
+		}
+
+		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c2"));
+		if (kv.size() != 0) {
+			sb.append(", f:c2=" + Bytes.toString(kv.get(0).getValue()));
+		}
+
+		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c3"));
+		if (kv.size() != 0) {
+			sb.append(", f:c3=" + Bytes.toString(kv.get(0).getValue()));
+		}
+
+		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c4"));
 		if (kv.size() != 0) {
 			sb.append(", f:c4=" + Bytes.toString(kv.get(0).getValue()));
 		}
-		
-		System.out.println(sb.toString());
+		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c5"));
+		if (kv.size() != 0) {
+			sb.append(", f:c5=" + Bytes.toString(kv.get(0).getValue()));
+		}
+
+		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c6"));
+		if (kv.size() != 0) {
+			sb.append(", f:c6=" + Bytes.toString(kv.get(0).getValue()));
+		}
+		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c7"));
+		if (kv.size() != 0) {
+			sb.append(", f:c7=" + Bytes.toString(kv.get(0).getValue()));
+		}
+		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c8"));
+		if (kv.size() != 0) {
+			sb.append(", f:c8=" + Bytes.toString(kv.get(0).getValue()));
+		}
+		return sb.toString();
 	}
 
+	
+	
+	
 	public static void main(String args[]) {
-		QueryByCondition queryByCondition = new QueryByCondition();
+		NoOrderQ3 queryByCondition = new NoOrderQ3();
+		if (args.length != 6) {
+			System.out.println("wrong parameter");
+			return;
+		}
+		String custkey = args[0];
+		String orderDate = args[1];
+		String saveFile = args[2];
+		String tableName = args[3];
+		int scanCache = Integer.parseInt(args[4]);
+		int threads = Integer.parseInt(args[5]);
+		System.out.println(custkey + "," + orderDate + "," + saveFile + ","
+				+ tableName + "," + scanCache + "," + threads);
 		
-		String svalue = "100000";
-		String evalue = "300000";
-		
-		String startValue = "1994-01-01";
-		String endValue = "1994-01-30";
 		long startTime = System.currentTimeMillis();
-
 		try {
 			// queryByCondition.queryByColumnValue(columnValue);
 			// queryByCondition.queryByRowKey(rowKey);
-			queryByCondition.queryByColumnRange(startValue, endValue,svalue,evalue);
+			queryByCondition.queryByColumnRange(custkey, orderDate, saveFile, tableName, scanCache, threads);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		long endTime = System.currentTimeMillis();
 		System.out.println("endtime - starttime = " + (endTime - startTime)
 				+ " ms");
+
 	}
 
 }

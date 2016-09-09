@@ -35,6 +35,7 @@ public class CreateTableWithIndexTest {
     h1.setMaxVersions(10);
     h1.setMinVersions(3);
     desc.addFamily(h1);
+    System.out.println(desc.toString()+"****************************************");
     
     // key ORDERKEY Int
     // c1 CUSTKEY Int
@@ -51,7 +52,7 @@ public class CreateTableWithIndexTest {
     index[0] = new IndexSpecification(Bytes.toBytes("f:c1"), IndexType.CCINDEX);
     index[1] = new IndexSpecification(Bytes.toBytes("f:c4"), IndexType.CCINDEX);
     indexDesc = new IndexTableDescriptor(desc, index);
-    
+    System.out.println("indexDesc--------->"+indexDesc.toString());
     
 	 if (admin.tableExists(tableName)) {
 	      admin.disableTable(tableName);
