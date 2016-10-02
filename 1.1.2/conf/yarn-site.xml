@@ -24,24 +24,24 @@
 
     <property>
         <name>yarn.resourcemanager.address</name>
-        <value>data7:8032</value>
+        <value>data18:8032</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.address</name>
-        <value>data7:8030</value>
+        <value>data18:8030</value>
     </property>
 
     <property>
         <name>yarn.resourcemanager.resource-tracker.address</name>
-        <value>data7:8031</value>
+        <value>data18:8031</value>
     </property>
     <property>
         <name>yarn.resourcemanager.admin.address</name>
-        <value>data7:8033</value>
+        <value>data18:8033</value>
     </property>
     <property>
         <name>yarn.resourcemanager.webapp.address</name>
-        <value>data7:8088</value>
+        <value>data18:8088</value>
     </property>
 
 </configuration>

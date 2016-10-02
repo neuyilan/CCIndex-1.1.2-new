@@ -22,7 +22,7 @@
 # remote nodes.
 
 # The java implementation to use.
-export JAVA_HOME=/opt/qhl/software/jdk1.7.0_79
+export JAVA_HOME=/usr/java/jdk1.7.0_51
 
 # The jsvc implementation to use. Jsvc is required to run secure datanodes.
 #export JSVC_HOME=${JSVC_HOME}

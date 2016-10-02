@@ -24,17 +24,30 @@
 	
 	<property>
 		<name>mapreduce.jobtracker.http.address</name>
-		<value>data7:50030</value>
+		<value>data18:50030</value>
 	</property>
 	
 	<property>
 		<name>mapreduce.jobhistory.address</name>
-		<value>data7:10020</value>
+		<value>data18:10020</value>
 	</property>
 	
 	<property>
 		<name>mapreduce.jobhistory.webapp.address</name>
-		<value>data7:19888</value>
+		<value>data18:19888</value>
 	</property>
+	
+	<!-- 
+	<property>
+		<name>mapred.job.tracker</name>
+		<value>data12:49001</value>
+	</property> 
+	 -->
+	<!-- 
+	<property>
+		<name>mapred.child.Java.opts</name>
+		<value>-Xmx4096m</value>
+	</property>
+	-->
 	
 </configuration>
