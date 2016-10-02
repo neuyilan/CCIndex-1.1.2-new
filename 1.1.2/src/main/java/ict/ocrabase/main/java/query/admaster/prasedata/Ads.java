@@ -6,6 +6,7 @@ public class Ads {
 	private String is_root;
 	private String mac1;
 	private String mcc;
+	private String ap_name;
 	private String appid;
 	private String city;
 	private String time;
@@ -128,6 +129,13 @@ public class Ads {
 	}
 	public void setOs(String os) {
 		this.os = os;
+	}
+	
+	public String getAp_name() {
+		return ap_name;
+	}
+	public void setAp_name(String ap_name) {
+		this.ap_name = ap_name;
 	}
 	public String getPhonenumber() {
 		return phonenumber;
@@ -351,6 +359,50 @@ public class Ads {
 	public void setWeek(String week) {
 		this.week = week;
 	}
-	
+	@Override
+	public String toString() {
+		return  idfv + ";" + screenpix + ";"
+				+ is_root + ";" + mac1 + "; " + mcc + ";"+ ap_name + ";" 
+				+ appid + "; " + city + ";" + time + ";"
+				+ event + ";" + province + ";" + gender
+				+ ";" + rawModel + ";" + os + ";"
+				+ phonenumber + ";" + osv + ";" + imei
+				+ ";" + androidID + ";" + cid + ";"
+				+ country + ";" + cookie + ";" + appv + ";"
+				+ sdkv + ";" + distinctID + ";" + dim_6
+				+ ";" + dim_5 + ";" + email + ";" + month
+				+ ";" + ap_mac + ";" + idfa + ";" + model
+				+ ";" + events + ";" + dim_7 + ";" + mac
+				+ ";" + date + ";" + net + ";"
+				+ isAnonymous + ";" + timestamp + ";" + id
+				+ ";" + ad_tracked + ";" + name + ";"
+				+ mnc + ";" + svrTime
+				+ ";" + package_name + ";" + hour
+				+ ";" + operator + ";" + ip + ";"
+				+ OpenUDID + ";" + brand + ";"
+				+ rawDistinctID + ";" + week;
+	}
 	
 }
+
+
+//return  idfv + ";" + screenpix + ";"
+//		+ is_root + ";" + mac1 + "; " + mcc + ";"
+//		+ appid + "; " + city + ";" + time + ";"
+//		+ event + ";" + province + ";" + gender
+//		+ ";" + rawModel + ";" + os + ";"
+//		+ phonenumber + ";" + osv + ";" + imei
+//		+ ";" + androidID + ";" + cid + ";"
+//		+ country + ";" + cookie + ";" + appv + ";"
+//		+ sdkv + ";" + distinctID + ";" + dim_6
+//		+ ";" + dim_5 + ";" + email + ";" + month
+//		+ ";" + ap_mac + ";" + idfa + ";" + model
+//		+ ";" + events + ";" + dim_7 + ";" + mac
+//		+ ";" + date + ";" + net + ";"
+//		+ isAnonymous + ";" + timestamp + ";" + id
+//		+ ";" + ad_tracked + ";" + name + ";"
+//		+ mnc + ";" + ap_name + ";" + svrTime
+//		+ ";" + package_name + ";" + hour
+//		+ ";" + operator + ";" + ip + ";"
+//		+ OpenUDID + ";" + brand + ";"
+//		+ rawDistinctID + ";" + week;

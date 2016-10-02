@@ -348,7 +348,7 @@ public class BulkLoad {
 		} else {
 			reduceNumber = getReduceNum(indexTableName.size());
 		}
-		
+		System.out.println("************************** bulkload type: "+type);
 		// deal with different "type" case
 		if (type.startsWith("iu")) {
 			method = "iu";
@@ -359,6 +359,7 @@ public class BulkLoad {
 				HTableDescriptor htd = admin.getTableDescriptor(Bytes.toBytes(t
 						.getTableName()));
 				String rowkeySplit = htd.getValue("incremental.rowkey.split");
+				System.out.println("********************rowkeySplit: "+rowkeySplit);
 				int firstLen = Integer.parseInt(rowkeySplit.split(":", 2)[0]);
 				byte[] lastRowkey = getLastRowkey(table);
 				int maxID = Integer.valueOf(Bytes.toString(lastRowkey)
