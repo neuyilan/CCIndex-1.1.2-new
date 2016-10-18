@@ -35,6 +35,7 @@ public class CreateTableTest {
 
     desc = new HTableDescriptor(TableName.valueOf(tableName));
     
+    
     HColumnDescriptor h1=new HColumnDescriptor(Bytes.toBytes("f1"));
     h1.setMaxVersions(10);
     h1.setMinVersions(3);

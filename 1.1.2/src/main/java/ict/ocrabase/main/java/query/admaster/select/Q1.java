@@ -9,9 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
-import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -23,50 +21,6 @@ import org.apache.hadoop.hbase.util.Bytes;
 public class Q1 {
 	
 	
-	public static String println_test(Result result) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("row=" + Bytes.toString(result.getRow()));
-
-		List<KeyValue> kv = result.getColumn(Bytes.toBytes("f"),
-				Bytes.toBytes("c1"));
-		if (kv.size() != 0) {
-			sb.append(", f:c1=" + Bytes.toString(kv.get(0).getValue()));
-		}
-
-		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c2"));
-		if (kv.size() != 0) {
-			sb.append(", f:c2=" + Bytes.toString(kv.get(0).getValue()));
-		}
-
-		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c3"));
-		if (kv.size() != 0) {
-			sb.append(", f:c3=" + Bytes.toString(kv.get(0).getValue()));
-		}
-
-		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c4"));
-		if (kv.size() != 0) {
-			sb.append(", f:c4=" + Bytes.toString(kv.get(0).getValue()));
-		}
-		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c5"));
-		if (kv.size() != 0) {
-			sb.append(", f:c5=" + Bytes.toString(kv.get(0).getValue()));
-		}
-
-		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c6"));
-		if (kv.size() != 0) {
-			sb.append(", f:c6=" + Bytes.toString(kv.get(0).getValue()));
-		}
-		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c7"));
-		if (kv.size() != 0) {
-			sb.append(", f:c7=" + Bytes.toString(kv.get(0).getValue()));
-		}
-		kv = result.getColumn(Bytes.toBytes("f"), Bytes.toBytes("c8"));
-		if (kv.size() != 0) {
-			sb.append(", f:c8=" + Bytes.toString(kv.get(0).getValue()));
-		}
-		return sb.toString();
-	}
-
 	public static void queryTest(String startDate, String endDate,
 			String tableName, int scanCache, int threads,String saveFile)
 			throws IOException {
@@ -112,7 +66,7 @@ public class Q1 {
 						Bytes.toBytes("f"), Bytes.toBytes("c24")));
 				map.put(distinctID, "");
 			}
-			fileWriter.write("events: "+count+" users: "+map.size()+"\n");
+			fileWriter.write("events:"+count+",\t"+"users:"+map.size()+"\n");
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (IndexNotExistedException e) {
@@ -143,8 +97,8 @@ public class Q1 {
 		int scanCache = Integer.parseInt(args[3]);
 		int threads = Integer.parseInt(args[4]);
 		String saveFile=args[5];
-		System.out.println(startDate + "," + endDate + ","+saveFile+","
-				+ tableName + "," + scanCache + "," + threads);
+//		System.out.println(startDate + "," + endDate + ","+saveFile+","
+//				+ tableName + "," + scanCache + "," + threads);
 		long startTime = System.currentTimeMillis();
 		queryTest(startDate, endDate, tableName, scanCache, threads,saveFile);
 		long endTime = System.currentTimeMillis();

@@ -1,4 +1,4 @@
-package ict.ocrabase.main.java.query.useCC;
+package ict.ocrabase.main.java.query.useCC.orQuery;
 
 import ict.ocrabase.main.java.client.index.IndexNotExistedException;
 import ict.ocrabase.main.java.client.index.IndexResultScanner;
@@ -15,16 +15,14 @@ import java.util.Map;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
-import org.apache.hadoop.hbase.filter.FilterList;
 import org.apache.hadoop.hbase.util.Bytes;
-
-import sun.tools.tree.ThisExpression;
+import org.apache.hadoop.yarn.webapp.hamlet.Hamlet.THEAD;
 /**
- * select orderkey, orderdate, shippriority from orders where custkey=? and orderdate < ?
+ * select orderkey, orderdate, shippriority from orders where custkey=? or orderdate < ? and orderdate > ?
  * @author houliang
- * c1=12919954	c4=1995-03-15
+ * c1=12919954	c4=1992-03-15
  */
-public class OrderQ3 {
+public class OrderQ3AndOr {
 	
 	
 	public static String println_test(Result result) {
@@ -71,7 +69,7 @@ public class OrderQ3 {
 		return sb.toString();
 	}
 
-	public static void queryTest(String custkey, String orderDate,
+	public static void queryTest(String custkey, String startOrderDate,String endOrderDate,
 			String saveFile, String tableName, int scanCache, int threads)
 			throws IOException {
 		File datasource = new File(saveFile);
@@ -87,22 +85,41 @@ public class OrderQ3 {
 		IndexTable indextable = new IndexTable(tableName);
 		indextable.setScannerCaching(scanCache);
 		indextable.setMaxScanThreads(threads);
-		// System.out.println("max thread:" + indextable.getMaxScanThreads());
 
-		Range[] ranges = new Range[2];
-		ranges[0] = new Range(indextable.getTableName(), Bytes.toBytes("f:c4"));
-		ranges[0].setEndType(CompareOp.LESS);
-		ranges[0].setEndValue(Bytes.toBytes(orderDate));
+		// the filter for orderdate  
+		// where orderdate>'startOrderDate' and orderdate < 'endOrderDate';
+		Range[] range1 = new Range[1];
+		range1[0] = new Range(indextable.getTableName(), Bytes.toBytes("f:c4"));
+		range1[0].setStartType(CompareOp.GREATER);
+		range1[0].setStartValue(Bytes.toBytes(startOrderDate));
+		range1[0].setEndType(CompareOp.LESS);
+		range1[0].setEndValue(Bytes.toBytes(endOrderDate));
+		
+		//the above is AND operation
+		
 
-		ranges[1] = new Range(indextable.getTableName(), Bytes.toBytes("f:c1"));
-		ranges[1].setStartType(CompareOp.EQUAL);
-		ranges[1].setStartValue(Bytes.toBytes(custkey));
-
-		byte[][] resultcolumn = new byte[1][];
-		resultcolumn[0] = Bytes.toBytes("f:c5");
+		//the filter for custkey
+//		where custkey='custkey'
+		Range[] range2 = new Range[1];
+		range2[0] = new Range(indextable.getTableName(), Bytes.toBytes("f:c1"));
+		range2[0].setStartType(CompareOp.EQUAL);
+		range2[0].setStartValue(Bytes.toBytes(custkey));
+		
+		// range1 OR range2 opeartion,In other words, where Range[][] ranges, the first dimension is OR operation, 
+		//while the second dimension is AND opeartion.
+		Range[][] ranges = new Range[2][];
+		ranges[0]=range1;
+		ranges[1]=range2;
+		
+		
+		
+		byte[][] resultcolumn = new byte[3][];
+		resultcolumn[0] = Bytes.toBytes("f:c1");
+		resultcolumn[1] = Bytes.toBytes("f:c4");
+		resultcolumn[2] = Bytes.toBytes("f:c5");
+		
 		try {
-			IndexResultScanner rs = indextable.getScanner(
-					new Range[][] { ranges }, resultcolumn);
+			IndexResultScanner rs = indextable.getScanner(ranges, resultcolumn);
 
 			Result r;
 
@@ -136,27 +153,28 @@ public class OrderQ3 {
 //	}
 
 	public static void main(String[] args) throws IOException {
-		if (args.length != 6) {
+		if (args.length != 7) {
 			System.out.println("wrong parameter");
 			return;
 		}
 		String custkey = args[0];
-		String orderDate = args[1];
-		String saveFile = args[2];
-		String tableName = args[3];
-		int scanCache = Integer.parseInt(args[4]);
-		int threads = Integer.parseInt(args[5]);
-		System.out.println(custkey + "," + orderDate + "," + saveFile + ","
+		String startOrderDate = args[1];
+		String endOrderDate = args[2];
+		String saveFile = args[3];
+		String tableName = args[4];
+		int scanCache = Integer.parseInt(args[5]);
+		int threads = Integer.parseInt(args[6]);
+		System.out.println(custkey + "," + startOrderDate + "," +endOrderDate+"," + saveFile + ","
 				+ tableName + "," + scanCache + "," + threads);
 		long startTime = System.currentTimeMillis();
-		queryTest(custkey, orderDate, saveFile, tableName, scanCache, threads);
+		queryTest(custkey, startOrderDate, endOrderDate,saveFile, tableName, scanCache, threads);
 		long endTime = System.currentTimeMillis();
 		System.out.println("endtime - starttime = " + (endTime - startTime)
 				+ " ms");
 
 	}
 	
-//	12919954 1995-03-15 /home/qhl/ccindex/test-result/orders_out/q3  real_table_with_index 1000 10
+//	12919954 1993-03-15 1993-04-15  /home/qhl/ccindex/test-result/orders_out/or_q3  real_table_with_index 1000 10
 	
 	
 }

@@ -44,4 +44,41 @@
         <value>data18:8088</value>
     </property>
 
+	<property>
+		<name>yarn.nodemanager.vmem-check-enabled</name>
+		<value>false</value>
+		<description>Whether virtual memory limits will be enforced for    containers</description>
+	</property>
+
+	<property>
+		<name>yarn.nodemanager.pmem-check-enabled</name>
+		<value>false</value>
+	</property>
+
+	<property>
+		<name>yarn.nodemanager.vmem-pmem-ratio</name>
+		<value>4</value>
+		<description>Ratio between virtual memory to physical memory when setting memory limits for containers</description>
+	</property>
+
+	 <property>
+	         <name>yarn.nodemanager.resource.cpu-vcores</name>
+			 <value>32</value>
+	</property>
+
+
+	 <property>
+	        <name>yarn.nodemanager.resource.memory-mb</name>
+	        <value>102400</value>
+		    <description>the amount of memory on the NodeManager in MB</description>
+	</property>
+
+
+	<property>
+	        <name>yarn.scheduler.maximum-allocation-mb</name>
+			<value>49152</value>
+			<source>yarn-default.xml</source>
+	</property>
+
+
 </configuration>

@@ -70,5 +70,16 @@
 		<value>org.apache.hbase.coprocessor.PutObserver,org.apache.hbase.coprocessor.DeleteObserver</value>
 	</property>
 
+	<property>
+		<name>hbase.client.scanner.timeout.period</name>
+		<value>360000000</value>
+	</property>
+
+	<property>
+         <name>hbase.rpc.timeout</name>
+         <value>360000000</value>
+	 </property>
+	
+
 
 </configuration>

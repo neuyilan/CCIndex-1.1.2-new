@@ -47,7 +47,7 @@ public class Import extends Cli {
 				//**************************************************************************
 //				type ="iu";
 				//**************************************************************************
-				System.out.println("*************************** import class type: "+type);
+//				System.out.println("*************************** import class type: "+type);
 				TableInfo ts = new TableInfo(imp.dealTableStruct(cli
 						.getOptionValue("ts")));
 				bl = new BulkLoad(ts, cli.getOptionValue("s"), type);

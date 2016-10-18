@@ -10,10 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -98,7 +96,7 @@ public class Q2 {
 			Arrays.sort(key);
 			
 			for(int i=0;i<key.length;i++){
-				fileWriter.write("hour: "+key[i]+"events: "+map1.get(key[i])+"users: "+map3.get(key[i])+"\n");
+				fileWriter.write("hour:"+key[i]+",\t"+"events:"+map1.get(key[i])+",\t"+"users:"+map3.get(key[i])+"\n");
 			}
 			fileWriter.flush();
 			fileWriter.close();
@@ -130,8 +128,8 @@ public class Q2 {
 		int scanCache = Integer.parseInt(args[3]);
 		int threads = Integer.parseInt(args[4]);
 		String saveFile=args[5];
-		System.out.println(startDate + "," + endDate + ","+saveFile+","
-				+ tableName + "," + scanCache + "," + threads);
+//		System.out.println(startDate + "," + endDate + ","+saveFile+","
+//				+ tableName + "," + scanCache + "," + threads);
 		long startTime = System.currentTimeMillis();
 		queryTest(startDate, endDate, tableName, scanCache, threads,saveFile);
 		long endTime = System.currentTimeMillis();

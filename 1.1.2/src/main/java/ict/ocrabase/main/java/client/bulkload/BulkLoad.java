@@ -294,7 +294,6 @@ public class BulkLoad {
 	public BulkLoad(Configuration conf, TableInfo tab, String srcDir, String type)
 			throws IOException, InterruptedException {
 		startTime = System.currentTimeMillis();
-
 		config = conf;
 		fs = FileSystem.get(config);
 		admin = new HBaseAdmin(config);

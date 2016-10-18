@@ -71,7 +71,7 @@ public class Q4 {
 			String event="";
 			
 			fileWriter = new FileWriter(datasource);
-			Map<String, Integer> map1 = new HashMap();
+			Map<String, Integer> map1 = new HashMap<String,Integer>();
 			HashMap<String, String> map2 = new HashMap<String, String>();
 			while ((r = rs.next()) != null) {
 				event = new String(r.getValue(
@@ -95,7 +95,7 @@ public class Q4 {
 					map3.put(entry.getValue(), 1+map3.get(entry.getValue()));
 				}
 			}
-			List<Map.Entry<String,Integer>> entryList=new ArrayList<>();  
+			List<Map.Entry<String,Integer>> entryList=new ArrayList<Map.Entry<String,Integer>>();  
 			entryList.addAll(map1.entrySet()); 
 			Q4.ValueComparator vc=new ValueComparator();  
 	        Collections.sort(entryList,vc);  
@@ -103,7 +103,7 @@ public class Q4 {
 			
 			for(int i=0;i<entryList.size();i++){
 				Map.Entry<String, Integer> entry=entryList.get(i);
-				fileWriter.write(" event: "+entry.getKey()+" events: "+map1.get(entry.getKey())+" users: "+map3.get(entry.getKey())+"\n");
+				fileWriter.write("event:"+"\t"+entry.getKey()+",\t"+"events:"+"\t"+map1.get(entry.getKey())+",\t"+"users:"+"\t"+map3.get(entry.getKey())+"\n");
 			}
 			
 			
@@ -138,8 +138,8 @@ public class Q4 {
 		int threads = Integer.parseInt(args[4]);
 		String os=args[5];
 		String saveFile=args[6];
-		System.out.println(startDate + "," + endDate + ","+saveFile+","
-				+ tableName + "," + scanCache + "," + threads);
+//		System.out.println(startDate + "," + endDate + ","+saveFile+","
+//				+ tableName + "," + scanCache + "," + threads);
 		long startTime = System.currentTimeMillis();
 		queryTest(startDate, endDate, tableName, scanCache, threads,os,saveFile);
 		long endTime = System.currentTimeMillis();

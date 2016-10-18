@@ -14,7 +14,7 @@ import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
 
 public class PutTableWithIndexTest {
-	static String filePath = "/opt/qhl/test-data/xaa1000.txt";//specify the file path
+	static String filePath = "/home/qhl/ccindex/test-data/xaa1.csv";//specify the file path
 	static boolean wal = false;
 
 	 private static final byte[] tableName = Bytes.toBytes("test_table_with_index");
@@ -40,7 +40,7 @@ public class PutTableWithIndexTest {
 	}
 
 	class Writer extends Thread {
-
+		
 		private byte[] reverse(byte[] b) {
 			for (int i = 0, j = b.length - 1; i < j; i++, j--) {
 				byte tmp = b[i];
@@ -69,10 +69,15 @@ public class PutTableWithIndexTest {
 				// c8 COMMENT String
 
 				HTable table = new HTable(conf, tableName);
+				System.out.println("**********************:"+table.toString());
+				System.out.println(table.getTableDescriptor().toString());
 
 				while ((line = reader.readLine()) != null) {
 					col = line.split(";");
-					Put put = new Put(reverse(Bytes.toBytes(col[0])));
+					System.out.println(col[0]);
+					System.out.println(Bytes.toString(reverse(Bytes.toBytes(col[0]))));
+//					Put put = new Put(reverse(Bytes.toBytes(col[0])));
+					Put put = new Put(Bytes.toBytes(col[0]));
 					put.add(Bytes.toBytes("f"), Bytes.toBytes("c1"),
 							Bytes.toBytes(Integer.valueOf(col[1]))); // int
 					put.add(Bytes.toBytes("f"), Bytes.toBytes("c2"),

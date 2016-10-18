@@ -64,17 +64,17 @@ public class Q3 {
 
 //			Map<byte[], DataType> columnMap = indextable.getColumnInfoMap();
 
-			long count = 0;
+//			long count = 0;
 			String distinctID="";
 			String event="";
 			String date="";
 			
 			String tmpKey="";
 			fileWriter = new FileWriter(datasource);
-			Map<String, Integer> map1 = new HashMap();
+			Map<String, Integer> map1 = new HashMap<String,Integer>();
 			HashMap<String, String> map2 = new HashMap<String, String>();
 			while ((r = rs.next()) != null) {
-				count++;
+//				count++;
 				
 				event = new String(r.getValue(
 						Bytes.toBytes("f"), Bytes.toBytes("c10")));
@@ -103,15 +103,15 @@ public class Q3 {
 					map3.put(entry.getValue(), 1+map3.get(entry.getValue()));
 				}
 			}
-			List<Map.Entry<String,Integer>> entryList=new ArrayList<>();  
+			List<Map.Entry<String,Integer>> entryList=new ArrayList<Map.Entry<String,Integer>>();  
 			entryList.addAll(map1.entrySet()); 
 			Q3.ValueComparator vc=new ValueComparator();  
 	        Collections.sort(entryList,vc);  
 			  
-			System.out.println("entryList.size()"+entryList.size());
+//			System.out.println("entryList.size()"+entryList.size());
 			for(int i=0;i<entryList.size();i++){
 				Map.Entry<String, Integer> entry=entryList.get(i);
-				fileWriter.write("date: "+entry.getKey().split("#")[0]+" event: "+entry.getKey().split("#")[1]+" events: "+map1.get(entry.getKey())+" users: "+map3.get(entry.getKey())+"\n");
+				fileWriter.write("date:"+"\t"+entry.getKey().split("#")[0]+",\t"+"event:"+"\t"+entry.getKey().split("#")[1]+",\t"+"events:"+"\t"+map1.get(entry.getKey())+",\t"+"users:"+"\t"+map3.get(entry.getKey())+"\n");
 			}
 			
 			fileWriter.flush();
@@ -144,8 +144,8 @@ public class Q3 {
 		int scanCache = Integer.parseInt(args[3]);
 		int threads = Integer.parseInt(args[4]);
 		String saveFile=args[5];
-		System.out.println(startDate + "," + endDate + ","+saveFile+","
-				+ tableName + "," + scanCache + "," + threads);
+//		System.out.println(startDate + "," + endDate + ","+saveFile+","
+//				+ tableName + "," + scanCache + "," + threads);
 		long startTime = System.currentTimeMillis();
 		queryTest(startDate, endDate, tableName, scanCache, threads,saveFile);
 		long endTime = System.currentTimeMillis();

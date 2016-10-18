@@ -32,11 +32,11 @@ if [ "$JAVA_HOME" = "" ]; then
 fi
 
 JAVA=$JAVA_HOME/bin/java
-JAVA_HEAP_MAX=-Xmx1000m 
+JAVA_HEAP_MAX=-Xmx10240m 
 
 # For setting YARN specific HEAP sizes please use this
 # Parameter and set appropriately
-# YARN_HEAPSIZE=1000
+ YARN_HEAPSIZE=10000
 
 # check envvars which might override default args
 if [ "$YARN_HEAPSIZE" != "" ]; then
@@ -52,7 +52,7 @@ fi
 # and/or YARN_RESOURCEMANAGER_OPTS.
 # If not specified, the default value will be picked from either YARN_HEAPMAX
 # or JAVA_HEAP_MAX with YARN_HEAPMAX as the preferred option of the two.
-#export YARN_RESOURCEMANAGER_HEAPSIZE=1000
+export YARN_RESOURCEMANAGER_HEAPSIZE=10240
 
 # Specify the max Heapsize for the timeline server using a numerical value
 # in the scale of MB. For example, to specify an jvm option of -Xmx1000m, set
@@ -77,7 +77,7 @@ fi
 # and/or YARN_NODEMANAGER_OPTS.
 # If not specified, the default value will be picked from either YARN_HEAPMAX
 # or JAVA_HEAP_MAX with YARN_HEAPMAX as the preferred option of the two.
-#export YARN_NODEMANAGER_HEAPSIZE=1000
+export YARN_NODEMANAGER_HEAPSIZE=10240
 
 # Specify the JVM options to be used when starting the NodeManager.
 # These options will be appended to the options specified as YARN_OPTS

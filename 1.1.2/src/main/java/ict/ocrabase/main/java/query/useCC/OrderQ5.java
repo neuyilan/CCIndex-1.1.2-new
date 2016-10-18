@@ -20,11 +20,10 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import sun.tools.tree.ThisExpression;
 /**
- * select orderkey, orderdate, shippriority from orders where custkey=? and orderdate < ?
+ * select orderkey, orderdate, shippriority from orders where  ? <orderdate and  orderdate < ?
  * @author houliang
- * c1=12919954	c4=1995-03-15
  */
-public class OrderQ3 {
+public class OrderQ5 {
 	
 	
 	public static String println_test(Result result) {
@@ -68,10 +67,12 @@ public class OrderQ3 {
 		if (kv.size() != 0) {
 			sb.append(", f:c8=" + Bytes.toString(kv.get(0).getValue()));
 		}
+		System.out.println(sb.toString());
 		return sb.toString();
+		
 	}
 
-	public static void queryTest(String custkey, String orderDate,
+	public static void queryTest(String startOrderDate, String endOrderDate,
 			String saveFile, String tableName, int scanCache, int threads)
 			throws IOException {
 		File datasource = new File(saveFile);
@@ -89,14 +90,12 @@ public class OrderQ3 {
 		indextable.setMaxScanThreads(threads);
 		// System.out.println("max thread:" + indextable.getMaxScanThreads());
 
-		Range[] ranges = new Range[2];
+		Range[] ranges = new Range[1];
 		ranges[0] = new Range(indextable.getTableName(), Bytes.toBytes("f:c4"));
+		ranges[0].setStartType(CompareOp.GREATER);
+		ranges[0].setStartValue(Bytes.toBytes(startOrderDate));
 		ranges[0].setEndType(CompareOp.LESS);
-		ranges[0].setEndValue(Bytes.toBytes(orderDate));
-
-		ranges[1] = new Range(indextable.getTableName(), Bytes.toBytes("f:c1"));
-		ranges[1].setStartType(CompareOp.EQUAL);
-		ranges[1].setStartValue(Bytes.toBytes(custkey));
+		ranges[0].setEndValue(Bytes.toBytes(endOrderDate));
 
 		byte[][] resultcolumn = new byte[1][];
 		resultcolumn[0] = Bytes.toBytes("f:c5");
@@ -114,15 +113,17 @@ public class OrderQ3 {
 			fileWriter = new FileWriter(datasource);
 			while ((r = rs.next()) != null) {
 				count++;
-				fileWriter.write(println_test(r)+"\n");
-				fileWriter.flush();
+				println_test(r);
+//				fileWriter.write(println_test(r)+"\n");
+//				fileWriter.flush();
 			}
-			fileWriter.close();
+//			fileWriter.close();
+			System.out.println("count:"+count);
 		} catch (IndexNotExistedException e) {
 			System.err.println("error query");
 			e.printStackTrace();
 		}
-
+		
 	}
 	
 //	public static void write2file(String str,String saveFile){
@@ -140,23 +141,23 @@ public class OrderQ3 {
 			System.out.println("wrong parameter");
 			return;
 		}
-		String custkey = args[0];
-		String orderDate = args[1];
+		String startOrderDate = args[0];
+		String endOrderDate = args[1];
 		String saveFile = args[2];
 		String tableName = args[3];
 		int scanCache = Integer.parseInt(args[4]);
 		int threads = Integer.parseInt(args[5]);
-		System.out.println(custkey + "," + orderDate + "," + saveFile + ","
+		System.out.println(startOrderDate + "," + endOrderDate + "," + saveFile + ","
 				+ tableName + "," + scanCache + "," + threads);
 		long startTime = System.currentTimeMillis();
-		queryTest(custkey, orderDate, saveFile, tableName, scanCache, threads);
+		queryTest(startOrderDate, endOrderDate, saveFile, tableName, scanCache, threads);
 		long endTime = System.currentTimeMillis();
 		System.out.println("endtime - starttime = " + (endTime - startTime)
 				+ " ms");
 
 	}
 	
-//	12919954 1995-03-15 /home/qhl/ccindex/test-result/orders_out/q3  real_table_with_index 1000 10
+//	1994-03-15 1994-04-15 /home/qhl/ccindex/test-result/orders_out/q5  real_table_with_index 1000 10
 	
 	
 }
